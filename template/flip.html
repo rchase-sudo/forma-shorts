@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root{--bg:#0a0907;--ink:#f6f0e4;--dim:#9a9184;--brass:#c9a35c;--brass2:#f2d394;--cool:#9fb6c9}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+  body{font-family:"Inter Display","Inter",sans-serif;color:var(--ink)}
+  .abs{position:absolute}
+  .full{inset:0}
+  .mono{font-family:"DejaVu Sans Mono",monospace;letter-spacing:.2em;text-transform:uppercase}
+  .h{font-weight:900;letter-spacing:-.045em;line-height:.9}
+  .line{overflow:hidden;display:block;padding:.04em 0 .1em}
+  .w{display:inline-block}
+  .brass{color:var(--brass2)}
+  .shadow{text-shadow:0 6px 40px rgba(0,0,0,.65),0 2px 6px rgba(0,0,0,.5)}
+  .pill{display:inline-flex;align-items:center;gap:16px;padding:18px 30px;border-radius:60px;font-size:28px;
+        background:rgba(10,9,7,.72);border:1.5px solid rgba(242,211,148,.55);color:var(--brass2);backdrop-filter:blur(6px)}
+  .dot{width:14px;height:14px;border-radius:50%;background:#ff4d3d;box-shadow:0 0 16px #ff4d3d}
+  .card{border-radius:34px;overflow:hidden;box-shadow:0 60px 140px rgba(0,0,0,.7),0 0 0 2px rgba(242,211,148,.4)}
+  .page{width:500px;height:647px;border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .page img{width:100%;height:100%;object-fit:cover}
+  .chip{display:inline-block;padding:14px 26px;border-radius:40px;font-size:30px;font-weight:700;letter-spacing:-.01em;
+        background:rgba(10,9,7,.8);border:2px solid rgba(242,211,148,.6);color:var(--ink);margin:0 14px 16px 0}
+  #grid{inset:-300px;background-image:linear-gradient(rgba(201,163,92,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(201,163,92,.13) 1px,transparent 1px);background-size:96px 96px}
+</style>
+</head>
+<body>
+<!-- ======= HOOK: TODAY ======= -->
+<div id="today" class="abs full" style="overflow:hidden">
+  <img id="todayImg" src="ASSET_TODAY" class="abs" style="height:1920px;left:50%;top:0;transform-origin:50% 50%">
+  <div class="abs full" style="background:linear-gradient(180deg,rgba(5,8,12,.55) 0%,rgba(5,8,12,0) 30%,rgba(5,8,12,0) 55%,rgba(5,8,12,.85) 100%)"></div>
+  <div id="todayTag" class="abs" style="left:70px;top:190px"><span class="pill mono"><span class="dot"></span>Today</span></div>
+  <div id="todayH" class="abs h shadow" style="left:70px;top:1180px;font-size:190px">
+    <span class="line"><span class="w">TXT_TODAY1</span></span>
+    <span class="line"><span class="w">TXT_TODAY2</span></span>
+  </div>
+  <div id="todaySub" class="abs mono shadow" style="left:76px;top:1600px;font-size:28px;color:var(--cool)">TXT_TODAYSUB</div>
+</div>
+
+<!-- ======= HOOK: AFTER ======= -->
+<div id="after" class="abs full" style="overflow:hidden">
+  <img id="afterImg" src="ASSET_RENDER" class="abs" style="height:1920px;left:50%;top:0;transform-origin:50% 55%">
+  <div class="abs full" style="background:linear-gradient(180deg,rgba(10,9,7,.6) 0%,rgba(10,9,7,0) 28%,rgba(10,9,7,0) 52%,rgba(10,9,7,.9) 100%)"></div>
+  <div id="afterTag" class="abs" style="left:70px;top:190px"><span class="pill mono" style="color:#0a0907;background:var(--brass2);border-color:var(--brass2)">What it could be</span></div>
+  <div id="afterH" class="abs h shadow" style="left:70px;top:1150px;font-size:210px;font-variant-numeric:tabular-nums">
+    <span class="line"><span class="w brass" id="sfNum">0</span><span class="w" style="font-size:.42em;letter-spacing:-.02em;margin-left:18px">TXT_STATUNIT</span></span>
+  </div>
+  <div id="afterSub" class="abs shadow" style="left:76px;top:1395px;font-size:52px;font-weight:700;letter-spacing:-.02em">TXT_STATSUB</div>
+  <div id="ring" class="abs" style="left:540px;top:960px;width:10px;height:10px;border-radius:50%;border:6px solid var(--brass2);transform:translate(-50%,-50%)"></div>
+</div>
+
+<!-- ======= PROCESS ======= -->
+<div id="proc" class="abs full">
+  <div id="grid" class="abs"></div>
+  <div class="abs full" style="background:radial-gradient(ellipse at 50% 55%,rgba(201,163,92,.22),transparent 60%)"></div>
+  <div id="procTop" class="abs" style="left:70px;top:170px;right:70px">
+    <div class="mono" style="font-size:26px;color:var(--brass);display:flex;justify-content:space-between"><span>The process</span><span id="stepNum">01 / 04</span></div>
+    <div style="display:flex;gap:12px;margin-top:22px">
+      <div class="abs" style="display:none"></div>
+      <div style="flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden"><div class="seg" style="height:100%;width:0;background:var(--brass2)"></div></div>
+      <div style="flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden"><div class="seg" style="height:100%;width:0;background:var(--brass2)"></div></div>
+      <div style="flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden"><div class="seg" style="height:100%;width:0;background:var(--brass2)"></div></div>
+      <div style="flex:1;height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden"><div class="seg" style="height:100%;width:0;background:var(--brass2)"></div></div>
+    </div>
+  </div>
+  <div id="stage" class="abs full" style="perspective:1800px">
+    <!-- step 1 -->
+    <div class="step abs full" id="st1">
+      <div class="h abs" style="left:70px;top:330px;font-size:132px"><span class="line"><span class="w">TXT_S1A</span></span><span class="line"><span class="w brass">TXT_S1B</span></span></div>
+      <div class="card abs scard" style="left:70px;top:660px;width:940px;height:960px"><img src="ASSET_TODAY" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="abs chips" style="left:70px;top:1660px;width:940px">
+        <span class="chip">TXT_CHIP1</span><span class="chip">TXT_CHIP2</span><span class="chip">TXT_CHIP3</span><span class="chip">TXT_CHIP4</span>
+      </div>
+    </div>
+    <!-- step 2 -->
+    <div class="step abs full" id="st2">
+      <div class="h abs" style="left:70px;top:330px;font-size:132px"><span class="line"><span class="w">TXT_S2A</span></span><span class="line"><span class="w brass">TXT_S2B</span></span></div>
+      <div class="card abs scard" style="left:70px;top:660px;width:940px;height:1080px"><img id="layoutImg" src="ASSET_LAYOUT" style="width:100%;height:100%;object-fit:cover"></div>
+    </div>
+    <!-- step 3 -->
+    <div class="step abs full" id="st3">
+      <div class="h abs" style="left:70px;top:330px;font-size:132px"><span class="line"><span class="w">TXT_S3A</span></span><span class="line"><span class="w brass">TXT_S3B</span></span></div>
+      <div class="card abs scard" style="left:40px;top:690px;width:1000px;height:1000px">
+        <img src="ASSET_MODEL" class="abs" style="width:100%;height:100%;object-fit:cover">
+        <img id="photoImg" src="ASSET_RENDER" class="abs" style="width:100%;height:100%;object-fit:cover">
+        <div id="photoLine" class="abs" style="top:0;bottom:0;width:4px;background:var(--brass2);box-shadow:0 0 30px var(--brass2)"></div>
+        <div class="abs mono" style="left:30px;bottom:28px;font-size:22px;color:#fff;text-shadow:0 2px 10px #000">Clay model</div>
+        <div class="abs mono" style="right:30px;bottom:28px;font-size:22px;color:var(--brass2);text-shadow:0 2px 10px #000">Photoreal</div>
+      </div>
+    </div>
+    <!-- step 4 -->
+    <div class="step abs full" id="st4">
+      <div class="h abs" style="left:70px;top:330px;font-size:132px"><span class="line"><span class="w">TXT_S4A</span></span><span class="line"><span class="w brass">TXT_S4B</span></span></div>
+      <div class="abs" id="pages" style="left:0;top:720px;width:1080px;height:1000px">
+        <div class="page abs pg" style="left:290px;top:120px"><img src="ASSET_P4"></div>
+        <div class="page abs pg" style="left:290px;top:120px"><img src="ASSET_P3"></div>
+        <div class="page abs pg" style="left:290px;top:120px"><img src="ASSET_P2"></div>
+        <div class="page abs pg" style="left:290px;top:120px"><img src="ASSET_P1"></div>
+      </div>
+      <div class="abs mono" id="pkgTag" style="left:0;width:1080px;text-align:center;top:1700px;font-size:28px;color:var(--brass)">Plan · Render · Due diligence</div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= CTA ======= -->
+<div id="cta" class="abs full" style="overflow:hidden">
+  <img src="ASSET_RENDER" id="ctaBg" class="abs" style="height:1920px;left:50%;top:0;filter:blur(18px) brightness(.32) saturate(1.2);transform:translateX(-50%) scale(1.15)">
+  <div class="abs full" style="background:radial-gradient(ellipse at 50% 40%,rgba(201,163,92,.25),transparent 65%)"></div>
+  <div id="ctaH" class="abs h shadow" style="left:70px;top:430px;font-size:168px">
+    <span class="line"><span class="w">Selling</span></span>
+    <span class="line"><span class="w">vacant</span></span>
+    <span class="line"><span class="w brass">land?</span></span>
+  </div>
+  <div id="ctaSub" class="abs shadow" style="left:76px;top:1000px;font-size:72px;font-weight:800;letter-spacing:-.03em">Text <span style="color:#0a0907;background:var(--brass2);padding:2px 18px;border-radius:14px;text-shadow:none">LAND</span> to</div>
+  <div id="ctaBtn" class="abs" style="left:70px;top:1150px">
+    <div style="position:relative;overflow:hidden;display:flex;align-items:center;gap:26px;border-radius:80px;background:var(--brass2);color:#0a0907;padding:34px 56px;font-size:76px;font-weight:900;letter-spacing:-.02em;font-variant-numeric:tabular-nums;box-shadow:0 20px 90px rgba(242,211,148,.5)">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="#0a0907"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+      (978) 346-5818
+      <div id="btnShine" class="abs" style="top:0;bottom:0;width:180px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.75),transparent)"></div>
+    </div>
+  </div>
+  <div id="ctaReply" class="abs" style="left:70px;top:1360px">
+    <span class="pill" style="font-size:40px;font-weight:700;color:var(--ink);padding:22px 34px;gap:20px">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#f2d394" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>
+      <span>I reply in under <span class="brass">5 minutes</span></span>
+    </span>
+  </div>
+  <div id="ctaLogo" class="abs mono" style="left:76px;top:1530px;font-size:30px;color:var(--dim)">FORMA&nbsp;DESIGNS &nbsp;·&nbsp; formadesigns.io</div>
+</div>
+
+<div id="flash" class="abs full" style="background:#fff6e2;opacity:0"></div>
+<canvas id="grain" class="abs full" width="540" height="960" style="width:1080px;height:1920px;opacity:.06;mix-blend-mode:overlay"></canvas>
+<div class="abs full" style="background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.6) 100%);pointer-events:none"></div>
+
+<script>
+const C=window.CUES||{"hook1":[0.3,1.629],"hook2a":[1.779,2.513],"hook2b":[2.633,3.73],"p1":[4.23,6.366],"p2":[6.486,8.348],"p3":[8.468,10.16],"p4":[10.28,12.142],"cta1":[12.542,13.823],"cta2":[13.973,17.952],"_end":19.352};
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>clamp((t-a)/(b-a));
+const eOut=x=>1-Math.pow(1-x,4), eIn=x=>x*x*x, eIO=x=>x<.5?8*x**4:1-Math.pow(-2*x+2,4)/2;
+const eBack=x=>{const c=1.9,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const lerp=(a,b,x)=>a+(b-a)*x;
+// key moments
+const FLIP=C.hook2a[0]+0.62;             // slam lands on "this"
+const PROC=C.p1[0]-0.25, CTA=C.cta1[0]-0.2, END=C._end;
+const STEPS=[C.p1[0],C.p2[0],C.p3[0],C.p4[0],CTA];
+window.TIMELINE={FLIP,PROC,CTA,END,STEPS};
+
+function words(root,t,start,step,dur=.42){
+  root.querySelectorAll('.w').forEach((w,i)=>{
+    const p=eOut(P(t,start+i*step,start+i*step+dur));
+    w.style.transform=`translateY(${(1-p)*110}%) skewY(${(1-p)*8}deg)`;
+    w.style.opacity=Math.min(1,p*1.6);
+  });
+}
+function show(id,on){$(id).style.display=on?'block':'none'}
+let seed=1;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647}
+function grain(f){const c=$('grain'),x=c.getContext('2d'),d=x.createImageData(540,960);seed=f+11;
+  for(let i=0;i<d.data.length;i+=4){const v=rnd()*255;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255}x.putImageData(d,0,0)}
+function shakeAt(t,hits,amp=14,k=11){let s=0;hits.forEach(h=>{if(t>=h)s+=Math.exp(-(t-h)*k)});return s*amp}
+
+window.renderAt=function(t,f){
+  const hits=[FLIP,CTA];
+  let fl=0;[FLIP].forEach(h=>{if(t>=h)fl=Math.max(fl,Math.exp(-(t-h)*7))});
+  STEPS.slice(1,4).forEach(h=>{if(t>=h)fl=Math.max(fl,.35*Math.exp(-(t-h)*14))});
+  if(t>=CTA)fl=Math.max(fl,.6*Math.exp(-(t-CTA)*9));
+  $('flash').style.opacity=fl;
+  const sh=shakeAt(t,hits,18)+shakeAt(t,STEPS.slice(1,4),6,16);
+  document.body.style.transform=`translate(${Math.sin(t*97)*sh}px,${Math.cos(t*83)*sh}px)`;
+
+  // ---- TODAY (0 -> FLIP)
+  show('today',t<FLIP);
+  if(t<FLIP){
+    // drop-in pull back, then hard punch toward the parcel on "And this..."
+    const pull=eOut(P(t,0,1.6)), push=eIn(P(t,C.hook2a[0]-.05,FLIP));
+    const s=lerp(1.55,1.0,pull)*lerp(1,2.4,push);
+    $('todayImg').style.transform=`translateX(-50%) scale(${s}) rotate(${lerp(-4,0,pull)}deg)`;
+    $('todayImg').style.filter=`saturate(.55) contrast(1.08) brightness(${lerp(.75,.95,pull)}) blur(${push*14}px)`;
+    $('todayTag').style.opacity=eOut(P(t,.15,.45));
+    $('todayTag').style.transform=`translateY(${(1-eOut(P(t,.15,.5)))*-40}px)`;
+    words($('todayH'),t,C.hook1[0]+.15,.32);
+    $('todayH').style.transform=`scale(${1+push*.35})`;$('todayH').style.opacity=1-push;
+    $('todaySub').style.opacity=eOut(P(t,1.0,1.4))*(1-push);
+  }
+  // ---- AFTER (FLIP -> PROC)
+  show('after',t>=FLIP&&t<PROC+.4);
+  if(t>=FLIP&&t<PROC+.4){
+    const a=P(t,FLIP,FLIP+.9), z=eBack(a);
+    const drift=P(t,FLIP,PROC);
+    $('afterImg').style.transform=`translateX(-46%) scale(${lerp(1.9,1.08,z)-drift*.06}) rotate(${lerp(6,0,eOut(a))}deg)`;
+    $('afterImg').style.filter=`saturate(${lerp(1.6,1.15,eOut(a))}) contrast(1.06) brightness(${lerp(1.6,1,eOut(P(t,FLIP,FLIP+.5)))})`;
+    const rp=P(t,FLIP,FLIP+.8);$('ring').style.width=$('ring').style.height=(rp*2400)+'px';
+    $('ring').style.opacity=(1-rp)*.9;$('ring').style.borderWidth=(6+30*(1-rp))+'px';
+    $('afterTag').style.opacity=eOut(P(t,FLIP+.15,FLIP+.4));
+    $('afterTag').style.transform=`scale(${eBack(P(t,FLIP+.15,FLIP+.5))})`;
+    words($('afterH'),t,FLIP+.12,.08,.35);
+    const c=eOut(P(t,FLIP+.1,FLIP+1.0));
+    $('sfNum').textContent=Math.round(STAT_VALUE*c).toLocaleString('en-US');
+    $('afterSub').style.opacity=eOut(P(t,FLIP+.3,FLIP+.6));
+    $('afterSub').style.transform=`translateY(${(1-eOut(P(t,FLIP+.3,FLIP+.7)))*40}px)`;
+    // exit: zoom-through into process
+    const ex=eIn(P(t,PROC-.15,PROC+.4));
+    $('after').style.transform=`scale(${1+ex*1.2})`;$('after').style.opacity=1-ex;$('after').style.filter=`blur(${ex*20}px)`;
+  }
+  // ---- PROCESS
+  show('proc',t>=PROC-.05&&t<CTA+.35);
+  if(t>=PROC-.05&&t<CTA+.35){
+    const pin=eOut(P(t,PROC,PROC+.45));
+    $('proc').style.opacity=pin;$('proc').style.transform=`scale(${lerp(.85,1,pin)})`;
+    $('grid').style.transform=`translate(${-t*20}px,${-t*44}px)`;
+    let cur=0;for(let i=0;i<4;i++)if(t>=STEPS[i]-.15)cur=i;
+    $('stepNum').textContent=`0${cur+1} / 04`;
+    document.querySelectorAll('.seg').forEach((s,i)=>s.style.width=(100*clamp(P(t,STEPS[i]-.15,STEPS[i+1]-.15)))+'%');
+    for(let i=0;i<4;i++){
+      const el=$('st'+(i+1)), a=STEPS[i]-.18, b=STEPS[i+1]-.18;
+      const vis=t>=a-.02&&t<b+.32; el.style.display=vis?'block':'none'; if(!vis)continue;
+      const ip=eOut(P(t,a,a+.5)), op=eIn(P(t,b-.02,b+.3));
+      const card=el.querySelector('.scard');
+      words(el.querySelector('.h'),t,a+.02,.09,.38);
+      el.querySelector('.h').style.transform=`translateX(${-op*700}px)`;
+      if(card){
+        card.style.transform=`translateX(${(1-ip)*900-op*1100}px) rotateY(${(1-ip)*-38+op*30}deg) rotateZ(${(1-ip)*6}deg) scale(${lerp(.8,1,ip)+P(t,a,b)*.04})`;
+        card.style.filter=`blur(${(1-ip)*10+op*14}px)`;
+      }
+      if(i===0){el.querySelectorAll('.chip').forEach((c,k)=>{const p=eBack(P(t,a+.35+k*.22,a+.65+k*.22));
+        c.style.transform=`scale(${p})`;c.style.opacity=clamp(p*2);});
+        el.querySelector('.chips').style.transform=`translateX(${-op*900}px)`;}
+      if(i===1){$('layoutImg').style.transform=`scale(${lerp(1.25,1.05,eOut(P(t,a,b)))})`;}
+      if(i===2){const w=eIO(P(t,a+.45,b-.25));
+        $('photoImg').style.clipPath=`inset(0 0 0 ${w*100}%)`;$('photoLine').style.left=`calc(${w*100}% - 2px)`;
+        $('photoLine').style.opacity=w>0&&w<1?1:0;}
+      if(i===3){el.querySelectorAll('.pg').forEach((pg,k)=>{const p=eBack(P(t,a+.15+k*.12,a+.6+k*.12));
+          const ang=[-16,-6,6,16][k], dx=[-260,-90,90,260][k];
+          pg.style.transform=`translate(${dx*p}px,${(1-p)*600+Math.abs(dx)*.12}px) rotate(${ang*p}deg)`;pg.style.opacity=clamp(p*2);});
+        $('pages').style.transform=`translateX(${-op*1100}px) scale(${1+P(t,a,b)*.05})`;
+        $('pkgTag').style.opacity=eOut(P(t,a+.7,a+1.0))*(1-op);}
+    }
+    if(t>CTA-.1){const ex=eIn(P(t,CTA-.1,CTA+.3));$('proc').style.opacity=1-ex;}
+  }
+  // ---- CTA
+  show('cta',t>=CTA-.05);
+  if(t>=CTA-.05){
+    const ip=eOut(P(t,CTA,CTA+.4));$('cta').style.opacity=ip;
+    $('ctaBg').style.transform=`translateX(-50%) scale(${lerp(1.4,1.15,eOut(P(t,CTA,END)))})`;
+    words($('ctaH'),t,CTA+.08,.22,.4);
+    const c2=C.cta2[0], c3=(C.cta3||[c2+2.6])[0];
+    const sp=eOut(P(t,c2,c2+.45));
+    $('ctaSub').style.opacity=sp;$('ctaSub').style.transform=`translateY(${(1-sp)*50}px)`;
+    const bt=c2+1.1, bp=eBack(P(t,bt,bt+.5));
+    const pulse=1+.02*Math.sin(Math.max(0,t-bt-.5)*7);
+    $('ctaBtn').style.opacity=clamp(P(t,bt,bt+.12));
+    $('ctaBtn').style.transform=`scale(${bp*pulse})`;$('ctaBtn').style.transformOrigin='0 50%';
+    const sw=(t-bt-.6)%1.6/1.6;$('btnShine').style.left=(t>bt+.6?lerp(-200,1000,clamp(sw)):-300)+'px';
+    const rp=eBack(P(t,c3,c3+.45));
+    $('ctaReply').style.opacity=clamp(P(t,c3,c3+.15));$('ctaReply').style.transform=`translateX(${(1-rp)*-80}px)`;
+    $('ctaLogo').style.opacity=eOut(P(t,c3+.8,c3+1.2));
+  }
+  grain(f|0);
+};
+window.renderAt(0,0);
+</script>
+</body>
+</html>

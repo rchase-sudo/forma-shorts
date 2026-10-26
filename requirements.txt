@@ -1,0 +1,10 @@
+anthropic>=0.40
+requests
+pillow
+numpy
+scipy
+soundfile
+kokoro-onnx
+playwright
+google-api-python-client
+google-auth

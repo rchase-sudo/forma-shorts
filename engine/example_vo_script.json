@@ -1,0 +1,57 @@
+{
+ "voice": "am_michael",
+ "speed": 1.12,
+ "lead_in": 0.3,
+ "lines": [
+  {
+   "id": "hook1",
+   "text": "This is a vacant lot.",
+   "gap": 0.15
+  },
+  {
+   "id": "hook2a",
+   "text": "And this...",
+   "gap": 0.12
+  },
+  {
+   "id": "hook2b",
+   "text": "is what it could be.",
+   "gap": 0.5
+  },
+  {
+   "id": "p1",
+   "text": "Parcel, zoning, wetlands, setbacks.",
+   "gap": 0.12
+  },
+  {
+   "id": "p2",
+   "text": "A site plan that actually fits.",
+   "gap": 0.12
+  },
+  {
+   "id": "p3",
+   "text": "A photoreal 3D render.",
+   "gap": 0.12
+  },
+  {
+   "id": "p4",
+   "text": "And the full due diligence package.",
+   "gap": 0.4
+  },
+  {
+   "id": "cta1",
+   "text": "Selling vacant land?",
+   "gap": 0.15
+  },
+  {
+   "id": "cta2",
+   "text": "Text the word, LAND, to the number on screen.",
+   "gap": 0.15
+  },
+  {
+   "id": "cta3",
+   "text": "I'll get back to you in under five minutes.",
+   "gap": 1.3
+  }
+ ]
+}

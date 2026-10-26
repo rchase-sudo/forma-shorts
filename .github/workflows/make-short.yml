@@ -1,0 +1,45 @@
+name: Make Short
+on:
+  schedule:
+    - cron: '17 10 * * *'   # ~6:17am ET
+    - cron: '17 21 * * *'   # ~5:17pm ET
+  workflow_dispatch:
+    inputs:
+      project_id:
+        description: 'Force a pipeline project id (optional)'
+        required: false
+concurrency: { group: make-short, cancel-in-progress: false }
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12', cache: pip }
+      - name: System deps
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg poppler-utils fonts-dejavu-core espeak-ng >/dev/null
+          mkdir -p ~/.local/share/fonts && cp fonts/*.otf ~/.local/share/fonts/ && fc-cache -f >/dev/null
+      - name: Python deps
+        run: |
+          pip install -q -r requirements.txt
+          python -m playwright install --with-deps chromium >/dev/null
+      - name: Voice model cache
+        uses: actions/cache@v4
+        with: { path: models, key: kokoro-v1.0 }
+      - name: Download voice model
+        run: |
+          mkdir -p models
+          [ -f models/kokoro.onnx ] || curl -sSL -o models/kokoro.onnx https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
+          [ -f models/voices.bin ] || curl -sSL -o models/voices.bin https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
+      - name: Make Short
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CONCEPT_SUPABASE_KEY: ${{ secrets.CONCEPT_SUPABASE_KEY }}
+          CRM_SUPABASE_KEY: ${{ secrets.CRM_SUPABASE_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          KOKORO_DIR: ${{ github.workspace }}/models
+          PROJECT_ID: ${{ inputs.project_id }}
+        run: python engine/make_short.py
