@@ -1,8 +1,8 @@
 name: Make Short
 on:
-  schedule:
-    - cron: '17 10 * * *'   # ~6:17am ET
-    - cron: '17 21 * * *'   # ~5:17pm ET
+  # schedule:  # paused 2026-10-26; re-enable when secrets are set
+    # - cron: '17 10 * * *'   # ~6:17am ET
+    # - cron: '17 21 * * *'   # ~5:17pm ET
   workflow_dispatch:
     inputs:
       project_id:
