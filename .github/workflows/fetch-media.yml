@@ -1,0 +1,24 @@
+name: Fetch job media
+# Requires this repo to be PRIVATE (media stays inside it) and the CONCEPT_SUPABASE_KEY secret.
+on:
+  push:
+    branches: [main]
+    paths: [media_request.txt]
+  workflow_dispatch: {}
+concurrency: { group: fetch-media, cancel-in-progress: false }
+jobs:
+  fetch:
+    if: github.event.repository.private
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    env:
+      CONCEPT_SUPABASE_KEY: ${{ secrets.CONCEPT_SUPABASE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -q requests
+      - run: python engine/fetch_media.py $(grep -oE '[0-9a-f-]{36}' media_request.txt)
+      - run: |
+          git config user.name "forma-ci"; git config user.email "forma-ci@users.noreply.github.com"
+          git add -f media && git commit -qm "media for $(grep -oE '[0-9a-f-]{36}' media_request.txt | tr '\n' ' ')" && git push || echo "nothing new"
